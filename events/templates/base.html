@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Management System</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'event_list' %}">Головна (Всі події)</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'create_event' %}">Створити подію</a></li>
+                <li>
+                    <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <button type="submit">Вийти</button>
+                    </form>
+                </li>
+                
+            {% else %}
+                <li><a href="{% url 'login' %}">Увійти</a></li>
+                <li><a href="{% url 'register_user' %}">Реєстрація</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <div>
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

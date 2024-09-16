@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Список подій</h2>
+
+  <form method="GET" action="">
+    <label for="search">Пошук за назвою:</label>
+    <input type="text" name="search" id="search" value="{{ request.GET.search }}">
+    
+    <label for="date">Дата:</label>
+    <input type="date" name="date" id="date" value="{{ request.GET.date }}">
+    
+    <label for="location">Місце:</label>
+    <input type="text" name="location" id="location" value="{{ request.GET.location }}">
+    
+    <button type="submit">Пошук</button>
+  </form>
+
+  <ul>
+    {% for event in events %}
+      <li>
+        <a href="{% url 'event_detail' event.id %}">{{ event.title }}</a> — {{ event.date }} — {{ event.location }}
+      </li>
+    {% empty %}
+      <li>Немає подій.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

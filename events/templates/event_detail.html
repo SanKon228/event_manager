@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ event.title }}</h2>
+<p>{{ event.description }}</p>
+<p>Дата: {{ event.date }}</p>
+<p>Місце: {{ event.location }}</p>
+
+<h3>Учасники</h3>
+<ul>
+    {% for attendee in attendees %}
+    <li>{{ attendee.user.username }}</li>
+    {% empty %}
+    <li>Немає учасників.</li>
+    {% endfor %}
+</ul>
+
+{% if user.is_authenticated %}
+    {% if user == event.organizer %}
+        <a href="{% url 'update_event' event.id %}" class="btn btn-primary">Змінити подію</a>
+
+        <form method="post" action="{% url 'delete_event' event.id %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Ви впевнені, що хочете видалити цю подію?');">Видалити подію</button>
+        </form>
+    {% else %}
+        <a href="{% url 'register_event' event.id %}" class="btn btn-success">Зареєструватися на подію</a>
+    {% endif %}
+{% else %}
+    <p>Будь ласка, увійдіть у систему, щоб зареєструватися на подію.</p>
+{% endif %}
+
+{% endblock %}

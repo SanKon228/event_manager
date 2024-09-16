@@ -1,0 +1,14 @@
+__pycache__/
+
+.env
+launch.json
+
+db.sqlite3
+
+venv/
+
+*.pyc
+*.pyo
+
+.vscode/
+.idea/
