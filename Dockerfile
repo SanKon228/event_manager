@@ -26,4 +26,4 @@ RUN python manage.py collectstatic --noinput
 RUN python manage.py migrate
 
 # Команда для запуску Celery
-CMD ["celery", "-A", "event_manager", "worker", "--loglevel=INFO"]
+CMD ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"]

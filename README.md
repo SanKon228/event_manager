@@ -26,7 +26,7 @@ EMAIL_HOST_PASSWORD=your_app_password"
 "docker-compose up --build"
 4. Create a Superuser for Admin Access
 "docker-compose exec django python manage.py createsuperuser"
-User Interface: http://localhost:8000
+User Interface: http://localhost:8000, http://127.0.0.1:8000
 Admin Panel: http://localhost:8000/admin
 Stop the running Docker containers
 "docker-compose down"
