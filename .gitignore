@@ -1,14 +1,18 @@
 __pycache__/
+*.py[cod]
+*.db
+*.sqlite
+*.sqlite3
 
 .env
-launch.json
+.env.*
 
-db.sqlite3
-
+.venv/
 venv/
+env/
 
-*.pyc
-*.pyo
+staticfiles/
 
 .vscode/
 .idea/
+launch.json

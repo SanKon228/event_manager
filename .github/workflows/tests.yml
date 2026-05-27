@@ -1,0 +1,28 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run tests
+        env:
+          SECRET_KEY: test-secret
+          DEBUG: "False"
+          ALLOWED_HOSTS: localhost,127.0.0.1
+          DATABASE_URL: sqlite:///db.sqlite3
+          EMAIL_HOST: smtp.gmail.com
+          EMAIL_PORT: "587"
+          EMAIL_USE_TLS: "True"
+          EMAIL_HOST_USER: test@example.com
+          EMAIL_HOST_PASSWORD: test-password
+        run: python manage.py test
